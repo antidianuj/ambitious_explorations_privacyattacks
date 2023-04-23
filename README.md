@@ -70,3 +70,34 @@ We also considered several image classification datasets and target models. The 
 | CIFAR-10            | 0.5 million parameter CNN                                                  | Attention Model  | 0.5 million parameter CNN                                                  | 0.5604   | 0.7964   | 0.6361   | 0.5496   | 0.3928   | 0.4582   |
 | CSE7512-00 (Kaggle) | 0.5 million parameter CNN                                                  | Attention Model  | 20 million parameter Xception model (Imagenet pretrained-transfer learned) | 0.5044   | 0.2038   | 0.2907   | 0.6237   | 0.067    | 0.1218   |
 | CSE7512-00 (Kaggle) | 20 million parameter Xception model (Imagenet pretrained-transfer learned) | Attention Model  | 20 million parameter Xception model (Imagenet pretrained-transfer learned) | 0.6390   | 0.8768   | 0.6839   | 0.5907   | 0.164    | 0.2568   |
+
+
+
+
+## Model Inversion Attack
+### Gradient Descent based Attack
+I reconstructed the most fundamental model inversion attack can be be model as a standard gradient descent based minimization problem. This attack is demonstrated in following figure. Here C(1,f(x’)) is the cost function corresponding to desired label and the model’s output f(x’).
+ 
+![image](https://user-images.githubusercontent.com/47445756/233848003-f8c65286-ecaf-4efe-86c6-c3df02a3d7fe.png)
+Figure: Model Inversion Attack Pipeline
+
+
+We employed the model inversion attack over AT&T Database of Faces , and the target model is a two layer deep multi-layer perceptron. Following is the result over 100 epochs of model inversion attack.
+
+ ![image](https://user-images.githubusercontent.com/47445756/233848020-c1ecbc85-d02c-42b2-8522-3dffd3574bf3.png)
+Figure: Results of Model Inversion Attack
+
+### LASSO Based Attack
+#### Lasso Regression
+We also performed model inversion attack by fitting a LASSO regression model over synthetic samples similar to training data, and the output probability vectors of the target model corresponding to the synthetic data.  This essentially forms a black box attack. Following are the results.
+![image](https://user-images.githubusercontent.com/47445756/233848037-fa7e7b08-1dfa-4f55-95a9-76fc38a4884e.png)
+ 
+#### PCA-Normalized Lasso Regression
+In order to reduce the computation complexity associated with the above process and also eliminating the need for further post processing to improve the quality of the reconstructed images, we first perform PCA over the probability vectors to reduce its dimensionality and aso improve its feature representation. We also employed normalization of input and output data of the LASSO model, to improve the reconstruction accuracy. As the consequence, following are the results.
+ ![image](https://user-images.githubusercontent.com/47445756/233848050-9165f814-1599-4aae-8228-a45ad0f76110.png)
+
+### GAN Based Attack
+We also employed GAN based model inversion attack in a white box setting, where utilize the target model as the discriminator model, and the generator model comprises of transposed-convolution architecture. The dataset used would be synthetic image samples similar to the target model. The input to the generator is essentially the predicted probability vector (by the original target model) and the output of discriminator are hard labels. The results of this attack are as follows:
+![image](https://user-images.githubusercontent.com/47445756/233848057-a4006c12-d0eb-4b9e-8819-86a4957f545c.png)
+
+
