@@ -1,4 +1,7 @@
 # ambitious_explorations_privacyattacks
+## Literature Comparison between Membership Inference Attack and Model Inversion
+
+![image](https://user-images.githubusercontent.com/47445756/233863325-1a80debb-dfce-4502-862c-6f9dffda66d5.png)
 
 ## Membership Inference Attack
  
