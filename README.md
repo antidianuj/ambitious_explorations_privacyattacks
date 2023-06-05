@@ -28,6 +28,11 @@ Therefore, we propose a following methodology to estimate the remembrance of ori
 ![image](https://user-images.githubusercontent.com/47445756/233847728-d70e716d-13d6-42a0-9636-44a8940a97ea.png)
 Figure: Framework for Target Model’s remembrance
 
+
+The main idea behind this can be summarized by following figure:
+![image](https://github.com/dianujizer/ambitious_explorations_privacyattacks/assets/47445756/eddb35a4-d1a8-4dd8-b0cd-e2d4730a612d)
+Figure: Idea being Target Model's rememberance
+
 Attack Model
 Since attack model is the fundamental part of all membership inference attacks, therefore, its structure needs to be clearly defined that should be invariant to any given target model, and any given attack zoo. In this regard, we also proposed a new architecture for attack model, that would remain same for any model and attack considered.
 
